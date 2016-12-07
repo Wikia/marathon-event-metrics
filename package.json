@@ -1,0 +1,21 @@
+{
+  "name": "marathon-task-metrics",
+  "version": "0.1.0",
+  "description": "A simlpe task status reporter for Marathon/Influx",
+  "main": "app.js",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "keywords": [
+    "marathon",
+    "influxdb",
+    "metrics"
+  ],
+  "author": "pwojcik@wikia-inc.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "promise": "^7.1.1"
+  }
+}
