@@ -2,6 +2,10 @@
   "name": "marathon-task-metrics",
   "version": "0.1.0",
   "description": "A simlpe task status reporter for Marathon/Influx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wikia/marathon-event-metrics.git"
+  },
   "main": "app.js",
   "scripts": {
     "start": "node ./src/app.js"
