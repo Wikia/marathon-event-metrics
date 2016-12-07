@@ -26,6 +26,8 @@ app.post('/events', (req, res) => {
 
 app.get('/__healthcheck', (req, res) => {
     res.send('ok');
-})
+});
+
+console.log(`Starting server on port ${config.port}`);
 
 app.listen(config.port);

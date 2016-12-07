@@ -24,6 +24,7 @@ module.exports = function crateEventProcessor(influx) {
 
     return {
         process: function(event) {
+            console.log(`Received event: ${event.eventType}`);
             const adapter = dataAdapters[event.eventType];
             if (adapter) {
                 const dataPoint = adapter(event);
