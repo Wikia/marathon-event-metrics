@@ -62,7 +62,6 @@ module.exports = function(config) {
 
     function unsubscribeFromSimilar(callbackUrl, callback) {
         return getSubscriptions().then(urls => {
-            urls.forEach(url => console.log(url));
             const urlPattern = new RegExp(callbackUrl.replace(/:\d+/, ':\\d+'));
             return Promise.all(urls.filter(url => urlPattern.test(url)).map(unsubscribe))
         });

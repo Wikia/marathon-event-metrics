@@ -7,11 +7,7 @@ const config = require('./config');
 
 marathon(config.marathon).resubscribe(`http://${config.callback.host}:${config.callback.port}/events`);
 
-const influxClient = influx({
-    host: config.influx.host,
-    port: config.influx.port,
-    db: config.influx.db
-});
+const influxClient = influx(config.influx);
 
 const processor = eventProcessor(influxClient);
 
