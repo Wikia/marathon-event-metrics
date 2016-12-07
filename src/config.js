@@ -3,7 +3,8 @@ module.exports = {
     influx: {
         host: process.env.INFLUX_HOST,
         port: process.env.INFLUX_PORT || 8086,
-        db: process.env.INFLUX_DB || 'marathon'
+        db: process.env.INFLUX_DB || 'marathon',
+        staticTags: process.env.INFLUX_STATIC_TAGS
     },
     marathon: {
         host: process.env.MARATHON_HOST || 'localhost',
