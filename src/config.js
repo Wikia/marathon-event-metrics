@@ -11,7 +11,7 @@ module.exports = {
     },
     callback: {
         host: process.env.CALLBACK_HOST || 'localhost',
-        port: process.env.$PORT0 || applicationPort
+        port: process.env.PORT0 || applicationPort
     },
     port: applicationPort
 };
