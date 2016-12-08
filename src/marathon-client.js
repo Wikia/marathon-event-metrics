@@ -1,5 +1,6 @@
 const http = require('http');
 const Promise = require('promise');
+const log = require('./log');
 
 module.exports = function(config) {
 
@@ -36,24 +37,24 @@ module.exports = function(config) {
     }
 
     function subscribe(callbackUrl) {
-        console.log(`Subscribing to event stream at: ${callbackUrl}`) 
+        log.info(`Subscribing to event stream at: ${callbackUrl}`) 
         http.request(subRequest('POST', callbackUrl), res => {
             if (res.statusCode >= 400) {
-                console.error(`Subscription failed: ${res.statusCode} ${res.statusMessage}`);
+                log.error(`Subscription failed: ${res.statusCode} ${res.statusMessage}`);
             } else {
-                console.log('Subscription succeeded');
+                log.info('Subscription succeeded');
             }
         }).end();
     }
 
     function unsubscribe(callbackUrl) {
         return new Promise((resolve, reject) => {
-            console.log(`Unsubscribing from event stream: ${callbackUrl}`)
+            log.info(`Unsubscribing from event stream: ${callbackUrl}`)
             http.request(subRequest('DELETE', callbackUrl), res => {
                 if (res.statusCode >= 400) {
-                    console.error(`Unsubscribe failed: ${res.statusCode} ${res.statusMessage}`);
+                    log.error(`Unsubscribe failed: ${res.statusCode} ${res.statusMessage}`);
                 } else {
-                    console.log('Usubscribe succeeded');
+                    log.info('Usubscribe succeeded');
                 }
                 resolve();
             }).end();
@@ -69,7 +70,7 @@ module.exports = function(config) {
 
     return {
         resubscribe: function(callbackUrl, callback) {
-            console.log(`Renewing subscribtion to Marathon events at ${config.host}`);
+            log.info(`Renewing subscribtion to Marathon events at ${config.host}`);
             unsubscribeFromSimilar(callbackUrl).then(() => subscribe(callbackUrl));
         }
     };
