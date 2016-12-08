@@ -8,13 +8,13 @@ module.exports = function crateEventProcessor(influx) {
      * that should be sent to influx
      */
     const dataAdapters = {
-        'status_update_event': function(event) {
+        'status_update_event': event => {
             const appId = event.appId;
             const cutPoint = appId.lastIndexOf('/');
             return {
                 tags: {
                     app: appId.substring(cutPoint + 1),
-                    group: appId.substring(0, cutPoint),
+                    group: appId.substring(0, cutPoint) || '/',
                     task_status: event.taskStatus
                 },
                 fields: {
@@ -25,7 +25,7 @@ module.exports = function crateEventProcessor(influx) {
     };
 
     return {
-        process: function(event) {
+        process: event => {
             log.info(`Received event: ${event.eventType}`);
             const adapter = dataAdapters[event.eventType];
             if (adapter) {
