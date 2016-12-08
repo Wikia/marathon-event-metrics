@@ -4,6 +4,7 @@ const eventProcessor = require('./event-processor');
 const influx = require('./influx-client');
 const marathon = require('./marathon-client');
 const config = require('./config');
+const log = require('./log');
 
 marathon(config.marathon).resubscribe(`http://${config.callback.host}:${config.callback.port}/events`);
 
@@ -24,6 +25,6 @@ app.get('/__healthcheck', (req, res) => {
     res.send('ok');
 });
 
-console.log(`Starting server on port ${config.port}`);
+log.info(`Starting server on port ${config.port}`);
 
 app.listen(config.port);

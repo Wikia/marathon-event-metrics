@@ -1,4 +1,5 @@
 const http = require('http');
+const log = require('./log');
 
 module.exports = function influx(config) {
 
@@ -30,7 +31,7 @@ module.exports = function influx(config) {
     return {
         writePoint: function(measurement, point, time) {
             const dataPoint = serialize(measurement, point.tags, point.fields, time);
-            console.log(`Writing data point: ${dataPoint}`);
+            log.info(`Writing data point: ${dataPoint}`);
             const options = {
                 host: config.host,
                 port: config.port,
@@ -43,11 +44,11 @@ module.exports = function influx(config) {
             };
             const req = http.request(options, res => {
                 if (res.statusCode !== 204) {
-                    console.error('Request to Influx failed');
+                    log.error(`Request to Influx failed: ${res.statusCode} ${res.statusMessage}`);
                 }
             });
             req.setTimeout(1000, () => {
-                console.error('Request to Influx timed out');
+                log.error('Request to Influx timed out');
             })
             req.write(dataPoint);
             req.end();

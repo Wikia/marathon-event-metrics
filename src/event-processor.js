@@ -1,3 +1,5 @@
+const log = require('./log');
+
 module.exports = function crateEventProcessor(influx) {
 
     /**
@@ -24,7 +26,7 @@ module.exports = function crateEventProcessor(influx) {
 
     return {
         process: function(event) {
-            console.log(`Received event: ${event.eventType}`);
+            log.info(`Received event: ${event.eventType}`);
             const adapter = dataAdapters[event.eventType];
             if (adapter) {
                 const dataPoint = adapter(event);
