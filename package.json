@@ -1,6 +1,6 @@
 {
   "name": "marathon-task-metrics",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "A simlpe task status reporter for Marathon/Influx",
   "repository": {
     "type": "git",
